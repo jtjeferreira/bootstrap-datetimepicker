@@ -2629,7 +2629,8 @@
         disabledTimeIntervals: false,
         disabledHours: false,
         enabledHours: false,
-        viewDate: false
+        viewDate: false,
+        parseInputDate: undefined
     };
 
     return $.fn.datetimepicker;
