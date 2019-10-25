@@ -2327,6 +2327,12 @@
             return picker;
         };
 
+        picker.moment = function (newMoment) {
+            moment = newMoment;
+            date = getMoment();
+            viewDate = date.clone();
+        };
+
         // initializing element and component attributes
         if (element.is('input')) {
             input = element;
