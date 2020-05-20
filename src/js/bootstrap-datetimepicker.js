@@ -878,7 +878,9 @@
                     }
                 }
 
-                if (isValid(targetMoment)) {
+                // [2020-05-20] kilerbee: added options.keepInvalid check, because otherwise control value may be
+                // broken when changing date, minDate, and maxDate simultaneously
+                if (isValid(targetMoment) || options.keepInvalid) {
                     date = targetMoment;
                     viewDate = date.clone();
                     input.val(date.format(actualFormat));
@@ -1706,16 +1708,21 @@
             if (!parsedDate.isValid()) {
                 throw new TypeError('maxDate() Could not parse date parameter: ' + maxDate);
             }
+            // [2020-05-20] kilerbee: commented, because when changing both minDate and maxDate this check do a validation according to the old value
+/*
             if (options.minDate && parsedDate.isBefore(options.minDate)) {
                 throw new TypeError('maxDate() date parameter is before options.minDate: ' + parsedDate.format(actualFormat));
             }
+*/
             options.maxDate = parsedDate;
+/*
             if (options.useCurrent && !options.keepInvalid && date.isAfter(maxDate)) {
                 setValue(options.maxDate);
             }
             if (viewDate.isAfter(parsedDate)) {
                 viewDate = parsedDate.clone().subtract(options.stepping, 'm');
             }
+*/
             update();
             return picker;
         };
@@ -1742,16 +1749,21 @@
             if (!parsedDate.isValid()) {
                 throw new TypeError('minDate() Could not parse date parameter: ' + minDate);
             }
+            // [2020-05-20] kilerbee: commented, because when changing both minDate and maxDate this check do a validation according to the old value
+/*
             if (options.maxDate && parsedDate.isAfter(options.maxDate)) {
                 throw new TypeError('minDate() date parameter is after options.maxDate: ' + parsedDate.format(actualFormat));
             }
+*/
             options.minDate = parsedDate;
+/*
             if (options.useCurrent && !options.keepInvalid && date.isBefore(minDate)) {
                 setValue(options.minDate);
             }
             if (viewDate.isBefore(parsedDate)) {
                 viewDate = parsedDate.clone().add(options.stepping, 'm');
             }
+*/
             update();
             return picker;
         };
